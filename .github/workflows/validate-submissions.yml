@@ -1,0 +1,62 @@
+name: Validate Learner Submissions
+
+on:
+  pull_request:
+    paths:
+      - 'submissions/**'
+      - 'weekly-reports/**'
+      - 'scripts/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  validate:
+    name: Run Submission & Integrity Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run Secret Leak Prevention Check
+        run: |
+          echo "Scanning for accidental secret commits..."
+          python -c "
+          import re, sys
+          from pathlib import Path
+          
+          SUSPICIOUS_PATTERNS = [
+              re.compile(r'AKIA[0-9A-Z]{16}'), # AWS Access Key
+              re.compile(r'-----BEGIN (?:RSA|OPENSSH|DSA|EC) PRIVATE KEY-----'), # Private Key
+              re.compile(r'ghp_[a-zA-Z0-9]{36}'), # GitHub Personal Access Token
+          ]
+          
+          violations = 0
+          for p in Path('.').rglob('*'):
+              if p.is_file() and not any(part.startswith('.') for part in p.parts if part != '.'):
+                  try:
+                      text = p.read_text(encoding='utf-8', errors='ignore')
+                      for pattern in SUSPICIOUS_PATTERNS:
+                          if pattern.search(text):
+                              print(f'::error file={p}::Potential secret detected matching pattern {pattern.pattern}')
+                              violations += 1
+                  except Exception:
+                      pass
+          if violations > 0:
+              sys.exit(1)
+          print('No plain-text credentials detected.')
+          "
+
+      - name: Run Submission Structure & Report Validator
+        run: |
+          python scripts/validate_submission.py --all

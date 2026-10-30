@@ -1,0 +1,65 @@
+{
+  "record_id": "SAMPLE-COHORT-2026-001",
+  "sample_notice": "SAMPLE DATA FOR VERIFICATION PURPOSES ONLY",
+  "last_updated": "2026-10-30T12:00:00Z",
+  "learner": {
+    "name": "Alex Mercer",
+    "email": "alex.mercer@example.com",
+    "mentor": "Sarah Connor",
+    "enrolled_date": "2026-09-01"
+  },
+  "progress": {
+    "current_week": 8,
+    "completed_weeks": 7,
+    "current_stage": 1,
+    "stage_name": "Technical Foundations",
+    "total_hours_logged": 138.5,
+    "completed_assignments": 35,
+    "average_assessment_score": 87.2,
+    "progression_gates": [
+      {
+        "name": "Gate 1: Technical Foundations",
+        "stage": 1,
+        "status": "SCHEDULED",
+        "date": "2026-11-01",
+        "score": null,
+        "signed_by": null
+      },
+      {
+        "name": "Gate 2: DevOps Engineering Tools",
+        "stage": 2,
+        "status": "NOT_STARTED",
+        "date": null,
+        "score": null,
+        "signed_by": null
+      },
+      {
+        "name": "Gate 3: Production Engineering & Capstone",
+        "stage": 3,
+        "status": "NOT_STARTED",
+        "date": null,
+        "score": null,
+        "signed_by": null
+      }
+    ]
+  },
+  "competencies": {
+    "linux": {
+      "file_permissions": { "status": "INDEPENDENT", "evidence": "A01-04 hardened directory tree" },
+      "systemd_services": { "status": "INDEPENDENT", "evidence": "A02-02 custom telemetry service" },
+      "storage_forensics": { "status": "INDEPENDENT", "evidence": "A02-05 disk audit" }
+    },
+    "networking": {
+      "subnetting_cidr": { "status": "INDEPENDENT", "evidence": "A03-02 multi-tier CIDR map" },
+      "dns_resolution": { "status": "GUIDED", "evidence": "A03-04 dig trace logs" },
+      "nginx_reverse_proxy": { "status": "INDEPENDENT", "evidence": "A04-03 Nginx SSL termination" }
+    },
+    "automation": {
+      "bash_scripting": { "status": "INDEPENDENT", "evidence": "A07-02 system audit script" },
+      "python_automation": { "status": "INDEPENDENT", "evidence": "A07-04 subprocess monitor" }
+    },
+    "databases": {
+      "postgresql_basics": { "status": "LEARNING", "evidence": "A08-03 relational schema creation" }
+    }
+  }
+}

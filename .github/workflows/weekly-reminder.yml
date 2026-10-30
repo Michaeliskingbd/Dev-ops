@@ -1,0 +1,26 @@
+name: Weekly Cadence Notification & Reminders
+
+on:
+  schedule:
+    # Trigger at 08:00 UTC every Monday (Kickoff)
+    - cron: '0 8 * * 1'
+    # Trigger at 16:00 UTC every Friday (Submission Reminder)
+    - cron: '0 16 * * 5'
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  cadence-reminder:
+    name: Dispatch Cadence Reminder
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cadence Notification Output
+        run: |
+          DAY_OF_WEEK=$(date +%u)
+          if [ "$DAY_OF_WEEK" -eq 1 ]; then
+            echo "MONDAY KICKOFF: Review weekly learning objectives, plan practical assignments, and attend the weekly kickoff sync."
+          elif [ "$DAY_OF_WEEK" -eq 5 ]; then
+            echo "FRIDAY DEADLINE: Ensure all weekly assignments are committed, local validation has run, and weekly report is drafted for Saturday assessment."
+          fi

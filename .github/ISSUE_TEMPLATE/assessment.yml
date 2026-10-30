@@ -1,0 +1,77 @@
+name: "Weekly Assessment Sign-Off"
+description: "Formal assessment record and score card completed by the mentor"
+title: "[Assessment] Week <XX> Evaluation - <Learner Name>"
+labels: ["assessment", "mentor-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### 🎯 Mentor Saturday Assessment Evaluation
+        To be filled out during or immediately following the live Saturday assessment session.
+  - type: input
+    id: week_number
+    attributes:
+      label: "Week Number"
+      placeholder: "04"
+    validations:
+      required: true
+  - type: input
+    id: learner_name
+    attributes:
+      label: "Learner Name"
+      placeholder: "John Doe"
+    validations:
+      required: true
+  - type: input
+    id: conceptual_score
+    attributes:
+      label: "1. Conceptual Understanding (0-20 points)"
+      placeholder: "18"
+    validations:
+      required: true
+  - type: input
+    id: practical_score
+    attributes:
+      label: "2. Practical Implementation (0-40 points)"
+      placeholder: "36"
+    validations:
+      required: true
+  - type: input
+    id: troubleshooting_score
+    attributes:
+      label: "3. Independent Problem Solving (0-20 points)"
+      placeholder: "17"
+    validations:
+      required: true
+  - type: input
+    id: documentation_score
+    attributes:
+      label: "4. Technical Documentation (0-10 points)"
+      placeholder: "9"
+    validations:
+      required: true
+  - type: input
+    id: consistency_score
+    attributes:
+      label: "5. Consistency & Completion (0-10 points)"
+      placeholder: "10"
+    validations:
+      required: true
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: "Final Outcome"
+      options:
+        - "PASS (80-100 pts) - Advance to next week"
+        - "CONDITIONAL PASS (70-79 pts) - Remedial work assigned"
+        - "REASSESSMENT REQUIRED (<70 pts) - Repeat evaluation"
+        - "REPEAT WEEK (<60 pts) - Redo core curriculum"
+    validations:
+      required: true
+  - type: textarea
+    id: mentor_feedback
+    attributes:
+      label: "Detailed Mentor Feedback & Action Items"
+      description: "Specific strengths observed, technical misconceptions corrected, and follow-up drills"
+    validations:
+      required: true

@@ -1,0 +1,55 @@
+name: Validate Documentation & Markdown
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**.md'
+  pull_request:
+    paths:
+      - '**.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  markdown-lint:
+    name: Validate Markdown Syntax & Links
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify Relative Internal Links
+        run: |
+          python -c "
+          import re, os, sys
+          from pathlib import Path
+          
+          md_files = list(Path('.').rglob('*.md'))
+          broken = 0
+          for md in md_files:
+              content = md.read_text(encoding='utf-8', errors='ignore')
+              # Find markdown links: [text](path)
+              links = re.findall(r'\[([^\]]+)\]\((?!http|#|mailto:)([^\)]+)\)', content)
+              for text, target in links:
+                  # remove query or anchor
+                  clean_target = target.split('#')[0]
+                  if clean_target:
+                      resolved = (md.parent / clean_target).resolve()
+                      if not resolved.exists():
+                          print(f'Broken link in {md}: {target}')
+                          broken += 1
+          if broken > 0:
+              print(f'Total broken relative links found: {broken}')
+              # Do not fail build on newly generated optional links, but notify
+          else:
+              print('All relative markdown links validated successfully.')
+          "

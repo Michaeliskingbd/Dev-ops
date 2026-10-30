@@ -1,0 +1,45 @@
+name: "Technical Blocker Escalation"
+description: "Escalate a technical blocker after completing the 15-minute troubleshooting rule"
+title: "[Blocker] Week <XX>: <Brief description of blocker>"
+labels: ["blocker", "help-wanted"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### 🛑 Technical Blocker Escalation Form
+        Remember: As a DevOps engineer, structured diagnosis is your most important tool.
+  - type: input
+    id: context
+    attributes:
+      label: "Week and Assignment ID"
+      placeholder: "Week 04, Assignment A04-03 (Nginx Reverse Proxy)"
+    validations:
+      required: true
+  - type: textarea
+    id: desired_outcome
+    attributes:
+      label: "1. What were you attempting to achieve?"
+      description: "State the intended technical behavior clearly."
+    validations:
+      required: true
+  - type: textarea
+    id: actual_result
+    attributes:
+      label: "2. What actually happened? (Commands & Error Logs)"
+      description: "Include exact terminal commands and full error traces."
+    validations:
+      required: true
+  - type: textarea
+    id: hypotheses_tested
+    attributes:
+      label: "3. What hypotheses did you test during the 15-minute investigation?"
+      description: "Explain at least TWO distinct diagnostic actions you took and what their results indicated."
+    validations:
+      required: true
+  - type: textarea
+    id: suspect_cause
+    attributes:
+      label: "4. What do you currently suspect is the root cause?"
+      description: "Your best assessment of why the failure is occurring."
+    validations:
+      required: true

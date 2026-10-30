@@ -1,0 +1,63 @@
+name: "Assignment Submission"
+description: "Submit a completed weekly assignment for mentor review"
+title: "[Assignment] Week <XX> - <Assignment ID>: <Assignment Title>"
+labels: ["assignment", "needs-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### 📋 Weekly Assignment Submission Form
+        Ensure all code, configurations, and evidence logs are committed to your branch before submitting this issue.
+  - type: input
+    id: week_number
+    attributes:
+      label: "Week Number"
+      description: "Enter the two-digit week number (01 to 24)"
+      placeholder: "e.g. 03"
+    validations:
+      required: true
+  - type: input
+    id: assignment_id
+    attributes:
+      label: "Assignment ID & Title"
+      description: "e.g. A03-02: Subnetting and CIDR Calculation"
+      placeholder: "A03-02: Subnetting and CIDR Calculation"
+    validations:
+      required: true
+  - type: input
+    id: pr_link
+    attributes:
+      label: "Pull Request Link"
+      description: "Link to the GitHub Pull Request containing your code"
+      placeholder: "https://github.com/org/repo/pull/12"
+    validations:
+      required: true
+  - type: textarea
+    id: implementation_summary
+    attributes:
+      label: "Implementation Summary"
+      description: "Briefly explain how you solved the problem and key design decisions made"
+      placeholder: "Explain your implementation in your own words..."
+    validations:
+      required: true
+  - type: textarea
+    id: testing_evidence
+    attributes:
+      label: "Testing & Verification Evidence"
+      description: "Paste command outputs, logs, or verification commands executed"
+      placeholder: "$ curl -I http://localhost:8080\nHTTP/1.1 200 OK..."
+    validations:
+      required: true
+  - type: checkboxes
+    id: declarations
+    attributes:
+      label: "Learner Declarations"
+      options:
+        - label: "I have adhered to the 15-minute troubleshooting rule before asking for help."
+          required: true
+        - label: "I can explain every single line of code and configuration submitted."
+          required: true
+        - label: "Zero secrets, credentials, or private keys have been committed."
+          required: true
+        - label: "I ran `python scripts/validate_submission.py` and all checks passed."
+          required: true

@@ -1,0 +1,63 @@
+name: "Weekly Progress Report"
+description: "Submit your comprehensive weekly learning and self-assessment report"
+title: "[Weekly Report] Week <XX> - <Learner Name>"
+labels: ["weekly-report", "status-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### 📊 Weekly Accountability & Reflection Report
+        Reflect critically on what you learned, what remains confusing, and your engineering hours.
+  - type: input
+    id: week_number
+    attributes:
+      label: "Week Number (01-24)"
+      placeholder: "07"
+    validations:
+      required: true
+  - type: input
+    id: total_hours
+    attributes:
+      label: "Total Study & Implementation Hours This Week"
+      placeholder: "e.g. 18.5 hours"
+    validations:
+      required: true
+  - type: textarea
+    id: confident_concepts
+    attributes:
+      label: "What I Understand Confidently"
+      description: "Explain 2-3 technical concepts in your own words without reading from notes"
+    validations:
+      required: true
+  - type: textarea
+    id: unclear_concepts
+    attributes:
+      label: "What Remains Unclear or Confusing"
+      description: "Areas where your mental model feels weak or incomplete"
+    validations:
+      required: true
+  - type: textarea
+    id: major_blockers
+    attributes:
+      label: "Major Problems Encountered & How They Were Solved"
+      description: "Detail your debugging process for the hardest problem faced this week"
+    validations:
+      required: true
+  - type: input
+    id: pr_link
+    attributes:
+      label: "Weekly Pull Request Link"
+      placeholder: "https://github.com/org/repo/pull/45"
+    validations:
+      required: true
+  - type: dropdown
+    id: self_assessment
+    attributes:
+      label: "Self-Assessment Rating"
+      options:
+        - "Outstanding (Mastered concepts and completed bonus challenges)"
+        - "Solid (Completed all assignments independently with full understanding)"
+        - "Moderate (Completed assignments but needed significant assistance)"
+        - "Struggling (Core concepts still unclear; need remedial help)"
+    validations:
+      required: true
